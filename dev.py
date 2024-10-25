@@ -1,11 +1,11 @@
 import logging
 import time
 import requests
+
 from azure.identity import ManagedIdentityCredential
 from azure.mgmt.network import NetworkManagementClient
 from azure.mgmt.compute import ComputeManagementClient
 from azure.mgmt.resource import ResourceManagementClient
-
 
 
 
@@ -25,6 +25,8 @@ route_table_name = "functiontest-rtable"
 active_vm_ip = "10.201.0.4"
 passive_vm_ip = "10.201.0.5"
 
+@app.schedule(schedule="0 0 */1 * * *", arg_name="timer", run_on_startup=False, useMonitor=True)
+ 
 def main(mytimer: func.TimerRequest) -> None:
 #def main(mytimer=None) -> None: # When runing locally
     logging.info('Python Timer trigger function started.')
